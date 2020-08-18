@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
+            .heading {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 10;
+                background-color: #d4d4d4;
+                border-radius: 14px;
+                color: #000000;
+                font-size: 20px;
+                padding: 10px;
+                margin: 5px;
+                border: 3px solid #000000;
+            }
+            .deck {
+                background-color: #5e5d5d;
+                color: #FFFFFF;
+                padding: 5px;
+                border-radius: 8px;
+                margin: 3px;
+                vertical-align: middle;
+            }
+            .deck u {
+                font-weight: bold;
+            }
+            .deck input{
+                cursor: pointer;
+                height: 25px;
+                width: 25px;
+            }
+        </style>
+        <script>
+            
+        </script>
+    </head>
+    <body onLoad="var loaded = true;">
+        <div class="heading">Decks<hr></div>
+        <div id="deckList">
+        </div>
+    </body>
+    <script src="JS/decks.js"></script>
+</html>

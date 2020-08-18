@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title>CAH Test Page</title>
+    </head>
+    <body>
+        <centre><h1>CAH Test Page</h1></centre>
+        <br>
+        <iframe src="" id="iframe" width="99%"></iframe><br>
+        <input type="button" value="connect" onclick="connect()">
+        <input type="button" value="disconnect" onclick="disconnect()">
+        <input type="button" value="login" onclick="login()">
+        <input type="button" value="logout" onclick="logout()">
+        <input type="button" value="register" onclick="register()"></input>
+        <input type="button" value="register 2nd" onclick="register2nd()"></input>
+        <input type="button" value="create game" onclick="createGame()"></input>
+        <input type="button" value="add small deck" onclick="addSmallDeck()"></input>
+        <input type="button" value="add big deck" onclick="addBigDeck()"></input>
+        <input type="button" value="join game" onclick="joinGame()"></input>
+        <input type="button" value="leave game" onclick="leaveGame()"></input>
+        <input type="button" value="start game" onclick="startGame()"></input>
+        <input type="button" value="send message" onclick="sendMessage()"></input>
+        <input type="button" value="submit card" onclick="submitCard()"></input>
+        <input type="text" placeholder="winning cardID" id="usernameInput"></input>
+        <input type="button" value="submit winner" onclick="chooseWinner()"></input>
+        <script language="javascript" type="text/javascript">
+            var websocket;
+            function addToLog(text){
+                var x = document.getElementById("iframe");
+                var y = (x.contentWindow || x.contentDocument);
+                console.log(text);
+                if (y.document)y = y.document;
+                y.body.innerHTML = text+"<br>"+y.body.innerHTML;
+            }
+            function init(){
+                websocket = new WebSocket("ws://localhost:8080");
+                websocket.onopen = function(evt) { addToLog(`Connected!`) };
+                websocket.onclose = function(evt) { addToLog(`Disconnected!`) };
+                websocket.onmessage = function(evt) { addToLog(`Recieved: ${evt.data}`) };
+                websocket.onerror = function(evt) { addToLog(`Error: ${evt.data}`) };
+            }
+            function connect(){
+                websocket = new WebSocket("ws://localhost:8080");
+                websocket.onopen = function(evt) { addToLog(`Connected!`) };
+                websocket.onclose = function(evt) { addToLog(`Disconnected!`) };
+                websocket.onmessage = function(evt) { addToLog(`Recieved: ${evt.data}`) };
+                websocket.onerror = function(evt) { addToLog(`Error: ${evt.data}`) };
+            }
+            function disconnect(){
+                websocket.close();
+            }
+            function login(){
+                // 'coolKid', 'ihsfhiusf8383298', 'mrcool@dank.com', 456345345444)
+                websocket.send('{"action": "login", "username": "coolKid", "password":"ayup1234"}');
+            }
+            function register(){
+                websocket.send('{"action": "register", "username": "yeetasaurusrex", "password": "ayup1234", "email": "yeet@gmail.com"}');
+            }
+            function registerUser(username, password, email){
+                websocket.send(JSON.stringify({"action": "register", "username": username, "password": password, "email": email}));
+            }
+            function loginUser(username, password){
+                websocket.send(JSON.stringify({"action": "login", "username": username, "password": password}));
+            }
+            function register2nd(){
+                websocket.send('{"action": "register", "username": "logangster", "password": "uwuxd69", "email": "logangster@gmail.com"}');
+            }
+            function addSmallDeck(){
+                websocket.send('{"action": "game", "request": "add deck", "deckID": 2}');
+            }
+            function addBigDeck(){
+                websocket.send('{"action": "game", "request": "add deck", "deckID": 3}');
+            }
+            function logout(){
+                websocket.send('{"action": "logout"}');
+            }
+            function createGame(){
+                websocket.send('{"action": "get container", "request": "create game", "game name": "cool game"}');
+            }
+            function joinGame(){
+                websocket.send('{"action": "game", "request": "join game", "game name": "cool game"}');
+            }
+            function leaveGame(){
+                websocket.send('{"action": "game", "request": "leave game"}');
+            }
+            function startGame(){
+                websocket.send('{"action": "game", "request": "start game"}');
+            }
+            function sendMessage(){
+                websocket.send('{"action": "game", "request": "message", "content": "ayup"}');
+            }
+            function submitCard(){
+                websocket.send('{"action": "game", "request": "submit cards", "cards": [0]}');
+            }
+            function chooseWinner(){
+                var cardID = document.getElementById("usernameInput").value;
+                websocket.send(`{"action": "game", "request": "choose winner", "cardID": "${cardID}"}`);
+            }
+            /*function createClient(){
+                var client = 
+            }*/
+            window.addEventListener("load", init, false);
+        </script>
+    </body>
+</html>

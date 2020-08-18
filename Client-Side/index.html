@@ -1,0 +1,261 @@
+<html>
+    <head>
+        <title>CAH online landing page</title>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Tamma|Nova+Flat&display=swap" rel="stylesheet"> 
+        <style>
+            html, body {
+              overflow-x: hidden;
+              /*overflow-y: hidden; */
+            }
+    
+            body{
+                text-align: center;
+                /*background-image: url("img_tree.gif");*/
+                margin: 0;
+                padding: 0;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            @font-face {
+              font-family: Helvetica-Neue-Bold;
+              src: url(Helvetica-Neue-Bold.woff);
+            }
+            #quoteBox p {
+                margin: 20px;
+            }
+            section{
+                background-color: #232323;
+                color: #FFFFFF;
+                font-family: Helvetica-Neue-Bold;
+                z-index:0;
+                padding-top: 75px;
+                padding-bottom:75px;
+    
+            }
+            section.title{
+                font-size: 540%;
+            }
+            section.login{
+                height: 40%;
+                font-size: 170%;
+            }
+            section.register{
+                height: 53%;
+                font-size: 170%;
+                display: none;
+            }
+            section.register table{
+                margin: auto;
+                font-size: 110%;
+                color: #FFFFFF;
+                padding: 2%;
+                width: 50%;
+                border-style: solid;
+                border-width: 5px;
+            }
+            section.login table{
+                margin: auto;
+                font-size: 110%;
+                color: #FFFFFF;
+                padding: 2%;
+                width: 50%;
+                border-style: solid;
+                border-width: 5px;
+            }
+            section.login table tr th{
+                padding: 1%;
+            }
+            span.quote {
+                color: #000000;
+                font-size: 240%;
+                font-family: 'Baloo Tamma', cursive;
+            }
+            span.source{
+                color: #000000;
+                font-size: 120%;
+                font-family: 'Nova Flat', cursive;
+            }
+            p {
+                font-size: 160%;
+                font-family: Helvetica-Neue-Bold;
+            }
+            #password-complexity-error, #password-confirmation-error{
+                /*display: none; */
+                visibility: hidden;
+                font-size: 60%;
+                background-color: white;
+                color: black;
+            }
+            
+            #settingsOverlay {
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                z-index: 10;
+                top: 0;
+                left: 0;
+                background-color: #23232380;
+                display: none;
+            }
+            #settingsOverlay #startScreen p {
+                font-size: 50%;
+            }
+            #settingsOverlay #settingsInner {
+                width: 50%;
+                height: 50%;
+                left: 25%;
+                position: relative;
+                top: 25%;
+                text-align: center;
+                margin-top: 30px;
+                background-color: #232323;
+                border-style: solid;
+                border-width: 10px;
+                border-color: #ffffff;
+                color: #FFFFFF;
+                font-size: 50px;
+                padding:15px;
+                font-family: Helvetica-Neue-Bold;
+                border-radius: 20px;
+            }
+            #settingsOverlay h2 {
+                font-size: 25px;
+                font-family: Helvetica-Neue-Bold;
+                color: #FFFFFF;
+            }
+            #settingsOverlay table tr td input {
+                margin: 5px;
+                align-self: top;
+                flex-basis: 75px;
+                flex-grow: 0;
+            }
+            #settingsOverlay table tr {
+                display: flex;
+                flex-flow: row wrap;
+                align-content: flex-start;
+                justify-content: space-around;
+            }
+            #settingsOverlay table tr td {
+                text-align:center;
+                align-content: center;
+                border-style: dotted;
+                border-width: 10px;
+                border-color: #FFFFFF;
+                width: 40%;
+                margin: 10px;
+            }
+            #settingsOverlay #closeButton {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-size: 30px;
+            }
+            #settingsOverlay .notifyjs-container {
+                font-size: medium;
+            }
+            #fileDropArea {
+                display: block;
+                border: 4px dashed #ABABAB;
+                border-radius: 25px;
+                font-size: 20px;
+                padding: 30px;
+                margin: 15px;
+                font-family: Helvetica-Neue-Bold;
+                color: #ABABAB;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="/JS/clippy/clippy.css" media="all">
+        <!-- <link rel="stylesheet" type="text/css" href="/CSS/jquery-ui.css" media="all">
+        <script src="/JS/jquery-ui.js"></script> -->
+        <script src="/JS/jquery-3.4.1.min.js"></script>
+        <script src="/JS/clippy/clippy.js"></script>
+        <script src="/JS/notify.js"></script>
+    </head>
+    <body>
+        <section class="title">Cards Against Humanity</section>
+        <br>
+        <div id="quoteBox"></div>
+        <p>Cards Against Humanity is a card game for adults, it's licencing allows for people to make their own games, like cards against humanity online</p>
+        <p>So Here It is</p>
+        <section class="login">
+            Login Here:<br><br>
+            <table>
+                <tr>
+                    <th>
+                        Username:
+                    </th>
+                    <th>
+                        <input type="text" style="font-size:22px;width:100%" name="username">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Password: 
+                    </th>
+                    <th>
+                        <input type="password" style="font-size:22px;width:100%" name="password">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="submit" value="Register" style="font-size:22px;width:100%;height:100%" onclick="showRegister()">
+                    </th>
+                    <th>
+                        <input type="submit" value="Login" style="font-size:22px;width:100%;height:100%" onclick="login()">
+                    </th>
+                </tr>
+            </table>
+            <br>
+            Dont want to make an account? <input type="submit" value="Login As A Guest" style="font-size:22px;">
+        </section>
+        <section class="register">
+            <div id="password-complexity-error"></div><div id="password-confirmation-error">Your Passwords Do Not Match</div><br>Register Here:<br><br>
+            <table>
+                <tr>
+                    <th>
+                        Username:
+                    </th>
+                    <th>
+                        <input type="text" style="font-size:22px;width:100%" name="username">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Password: 
+                    </th>
+                    <th>
+                        <input type="password" style="font-size:22px;width:100%" name="password" onfocusout="checkPasswordComplexity(this.value)" id="register-password">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Password (confirm): 
+                    </th>
+                    <th>
+                        <input type="password" style="font-size:22px;width:100%" name="password" onfocusout="comparePasswords()" id="confirm-password">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Email: 
+                    </th>
+                    <th>
+                        <input type="text" style="font-size:22px;width:100%" name="email">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="submit" value="Login" style="font-size:22px;width:100%;height:100%" onClick="showLogin()">
+                    </th>
+                    <th>
+                        <input type="submit" value="Register" style="font-size:22px;width:100%;height:100%" onClick="register()">
+                    </th>
+                </tr>
+            </table>
+            <br>
+            Dont want to make an account?<input type="submit" value="Login As A Guest" style="font-size:22px;" id="login-as-guest" onclick="signInAsGuest()">
+        </section>
+    </body>
+    <script src="JS/main-client.js"></script>
+</html>

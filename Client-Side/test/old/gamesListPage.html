@@ -1,0 +1,59 @@
+<!-- 
+    This will be a basic page with just the listing, there will be the css on the index.html page
+-->
+<html>
+    <head>
+        <style>
+            @font-face {
+              font-family: Helvetica-Neue-Bold;
+              src: url(Helvetica-Neue-Bold.woff);
+            }
+            body {
+                background-color: #232323;
+                font-family: Helvetica-Neue-Bold;
+            }
+            table {
+                padding: 6px;
+                background-color: #FFFFFF;
+                border: 15px solid #232323;
+                display:inline-table
+            }
+            th {
+                border: 1px solid #777777;
+                text-align: left;
+                padding: 4px;
+            }
+            td {
+                border: 1px solid #353535;
+                text-align: left;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="testOutput"></div>
+        <script>
+            var testData = `{"games running":[{"name":"cool game6","players":1,"host":"coolKid","private":false,"rounds":10,"round":2,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game5","players":1,"host":"coolKid","private":false,"rounds":10,"round":3,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game1","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game2","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game3","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]}]}`;
+            var testDataOBJ = JSON.parse(testData);
+            var testOutput = document.getElementById("testOutput");
+            testOutput.innerHTML = "<ul>";
+            testDataOBJ["games running"].forEach((game) => {
+                var toAdd = "<li><table>";
+                toAdd += `<tr><th>Name: </th><th>${game.name}</th></tr>`;
+                toAdd += `<tr><td>Players: </td><td>${game.players}</td></tr>`;
+                toAdd += `<tr><td>Host: </td><td>${game.host}</td></tr>`;
+                toAdd += `<tr><td>Private: </td><td>${game.private ? "Yes" : "No"}</td></tr>`;
+                toAdd += `<tr><td>Rounds: </td><td>${game.rounds}</td></tr>`;
+                toAdd += `<tr><td>Round: </td><td>${game.round}</td></tr>`;
+                toAdd += `<tr><td>Decks Added: </td><td>${game["decks added"].length}</td></tr>`;
+                //toAdd += `<tr><td></td><td>${}</td></tr>`;
+                console.log(game.name);
+                toAdd += "</table>";
+                //toAdd += "join game"
+                toAdd += "</li>";
+                testOutput.innerHTML += toAdd;
+            });
+            testOutput.innerHTML = "</ul>";
+        </script>
+    </body>
+</html>

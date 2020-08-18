@@ -1,0 +1,311 @@
+<html>
+    <head>
+        <style>
+            html, body {
+              overflow-x: hidden;
+              /*overflow-y: hidden; */
+            }
+    
+            body{
+                text-align: center;
+                /*background-image: url("img_tree.gif");*/
+                margin: 0;
+                padding: 0;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            @font-face {
+              font-family: Helvetica-Neue-Bold;
+              src: url(Helvetica-Neue-Bold.woff);
+            }
+            section{
+                background-color: #232323;
+                color: #FFFFFF;
+                font-family: Helvetica-Neue-Bold;
+                z-index:0;
+                padding-top: 75px;
+                padding-bottom:75px;
+    
+            }
+            section.games{
+                font-size: 350%;
+            }
+            #sidebar {
+                height: 100%;
+                width: 50px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+                text-align: left;
+                font-family: Helvetica-Neue-Bold;
+            }
+            #sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            #sidebar .link {
+                visibility: hidden;
+            }
+
+            #sidebar a:hover {
+            color: #f1f1f1;
+            }
+
+            #sidebar .togglebtn {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            font-size: 36px;
+            margin-left: 50px;
+            visibility: visible;
+            }
+            #main {
+                margin-left: 50px;
+                transition: margin-left .5s;
+                
+            }
+            .disable-select {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none;   /* Chrome/Safari/Opera */
+                -khtml-user-select: none;    /* Konqueror */
+                -moz-user-select: none;      /* Firefox */
+                -ms-user-select: none;       /* Internet Explorer/Edge */
+                user-select: none;           /* Non-prefixed version, currently supported by any browser but < IE9 */
+            }
+            .shadow{
+                -webkit-box-shadow: 8px 8px 17px -8px rgba(0,0,0,0.75);
+                -moz-box-shadow: 8px 8px 17px -8px rgba(0,0,0,0.75);
+                box-shadow: 8px 8px 17px -8px rgba(255,255,255,0.75);
+            }
+            .card {
+                width:140px;
+                height:210px;
+                border-radius:15px;
+                text-align:left;
+                padding:15px;
+                font-family: Helvetica-Neue-Bold;
+                font-size:17px;
+                margin: 7px;
+                display: inline-block;
+                resize: vertical;
+                cursor: pointer;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none;   /* Chrome/Safari/Opera */
+                -khtml-user-select: none;    /* Konqueror */
+                -moz-user-select: none;      /* Firefox */
+                -ms-user-select: none;       /* Internet Explorer/Edge */
+                user-select: none;           /* Non-prefixed version, currently supported by any browser but < IE9 */
+            }
+            .submitButton {
+                margin: 10px;
+                padding: 5px;
+                font-size: 120%;
+            }
+            .white {
+                background-color: white;
+		        color:black;
+            }
+            .black {
+                background-color: black;
+		        color:white;
+                cursor: default;
+                margin: 20%;
+            }
+            .noClick {
+                cursor: not-allowed;
+            }
+            .click {
+                cursor: pointer;
+            }
+            .noClick .submittedWhiteCard {
+                cursor: not-allowed;
+            }
+            .selected {
+                border: 10px solid #000000;
+                text-decoration: underline;
+                margin: -3px;
+            }
+            .submittedWhiteCard {
+                width:80px;
+                height:150px;
+                font-size:13px;
+            }
+            .submittedCardsContainer {
+                background-color: #232323;
+                padding: 3px;
+                margin: 3px;
+                border-radius: 20px;
+                display: inline-flex;
+            }
+            .blackCards {
+                background-color: #232323;
+		        color:white;
+            }
+            .mainTable {
+                width: 99%;
+                height: 99%;
+            }
+            table, th, td { /*for development not wanted permanantly!*/
+                border: 1px solid black;
+            }
+            .blackBG {
+                background-color: #232323;
+            }
+            .winner {
+                background-color: #26D931;
+                animation: winningAnimation 2s;
+            }
+            @keyframes winningAnimation {
+                from {
+                    background-color: #148ceb;
+                }
+            }
+            #overlay{
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #23232380;
+            }
+            #overlay #startScreen {
+                width: 50%;
+                height: 50%;
+                left: 25%;
+                position: relative;
+                top: 25%;
+                text-align: center;
+                margin-top: 30px;
+                background-color: #232323;
+                border-style: solid;
+                border-width: 10px;
+                border-color: #ffffff;
+                color: #FFFFFF;
+                font-size: 50px;
+                padding:15px;
+                font-family: Helvetica-Neue-Bold;
+                border-radius: 20px;
+            }
+            #overlay #startScreen p {
+                font-size: 50%;
+            }
+            #overlay #startScreen p iframe {
+                height: 50%;
+            }
+            #overlay #startScreen input {
+                font-size: 50%;
+            }
+            #bottomLeft {
+                display: flex;
+                flex-flow: column;
+                height: 100%;
+            }
+            #playerList{
+                /*display: inline-block;*/
+                width: 35%;
+                margin: 2%;
+                flex: 1 1 auto;
+                height:300%;
+            }
+            #chat {
+                /*display: inline-block;*/
+                width: 55%;
+                height:300%;
+                margin: 1%;
+                flex: 1 1 auto;
+            }
+            #messageArea {
+                margin: 1%;
+                flex: 0 1 40px;
+            }
+            #infoBox {
+                cursor: move;
+                top:0;
+                left: 45%;
+                padding: 10px;
+                background-color: #232323;
+                color: #FFFFFF;
+                font-size: 20px;
+                font-family: Helvetica-Neue-Bold;
+                position: fixed;
+            }
+            /******* below obsolete******/
+
+        </style>
+    </head>
+    <body>
+        <div id="sidebar" class="disable-select">
+            <a href="javascript:void(0)" class="togglebtn" onclick="toggleSidebar()">☰</a>
+            <a href="javascript:void(0)" class="link" onclick="leaveGame()">Leave<br>Game</a>
+            <a href="javascript:void(0)" class="link" onClick="showSettingsOverlay()">Settings</a>
+            <a href="#" class="link" onClick="location.reload()">Log Out</a>
+        </div>
+        <div id="settingsOverlay">
+            <div id="settingsInner">
+                Settings <hr>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Change Your Email:</h2>
+                            <p><input type="text" name="email" placeholder="New Email Address" size="30" id="newEmail"><br>
+                            <input type="text" name="email" placeholder="Email Address Confirm" size="30" id="newEmailConfirm"><br>
+                            <input type="submit" value="Change Email" onClick="changeEmail()"></p>
+                        </td>
+                        <td>
+                            <h2>Change Your Password:</h2>
+                            <p><input type="password" name="password" placeholder="New Password" size="15" id="newPassword"><br>
+                            <input type="password" name="password" placeholder="New Password Confirm" size="15" id="newPasswordConfirm"><br>
+                            <input type="submit" value="Change Password" onClick="changePassword()"></p>
+                        </td>
+                    </tr>
+                </table>
+                <div id="closeButton" onClick="hideSettingsOverlay()">X</div>
+                <div id="fileDropArea">Drag Your JSON Deck Here! <br>Add This As A Private Deck?<input type="checkbox" id="privateDeckCheckbox"></div>
+            </div>
+        </div>
+        <div id="overlay">
+            <div id="startScreen">Game Setup<hr> 
+                <p>
+                    <iframe src="decks.html" id="decksAvailable"></iframe>
+                    <iframe src="playerList.html" id="playerListStartScreen"></iframe>
+                    <hr>
+                    <input type="submit" value="Leave Game" onClick="leaveGame()">
+                    <input type="submit" value="Start Game" class="hostControls" onClick="startGame()">
+                </p> 
+            </div>
+        </div>
+        <div id="main">
+            <table class="mainTable">
+                <tr height="50%">
+                    <td width="25%" id="blackCardArea">
+                    </td>
+                    <td id="submittedCardsArea">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="botomLeft">
+                            <iframe id="chat" src="chat.html"></iframe><iframe id="playerList" src="playerList.html"></iframe><br>
+                            <div id="messageArea"><input type="text" placeholder="message" id="messageBox"><input type="submit" value="send" onclick="sendMessage()"></div>
+                        </div>
+                        
+                    </td>
+                    <td class="blackBG" id="ownedCardsArea">
+                        <div class="card white shadow" onClick='selectCard(this)'>example text reee</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

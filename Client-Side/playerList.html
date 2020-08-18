@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="JS/playerList.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+            body {
+                font-family: 'Roboto', sans-serif;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+            .czar {
+                -webkit-box-shadow: 0px 0px 6px 3px rgba(38,217,49,1);
+                -moz-box-shadow: 0px 0px 6px 3px rgba(38,217,49,1);
+                box-shadow: 0px 0px 6px 3px rgba(38,217,49,1);
+            }
+            .clientPlayer {
+                border: 3px solid #232323;
+            }
+            .players {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 10;
+                background-color: #d4d4d4;
+                border-radius: 14px;
+                color: #000000;
+                font-size: 20px;
+                padding: 10px;
+                margin: 5px;
+                border: 3px solid #000000;
+            }
+            .player {
+                background-color: #5e5d5d;
+                color: #FFFFFF;
+                padding: 5px;
+                border-radius: 8px;
+                margin: 3px;
+            }
+            .player u {
+                font-weight: bold;
+            }
+            .winner {
+                animation: winningAnimation 4s;
+            }
+            @keyframes winningAnimation {
+                from {
+                    background-color: #148ceb;
+                }
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="players">Players<hr></div>
+        <div id="playersList">
+        </div>
+    </body>
+</html>

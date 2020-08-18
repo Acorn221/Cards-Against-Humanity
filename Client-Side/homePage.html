@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <style>
+            html, body {
+              overflow-x: hidden;
+              /*overflow-y: hidden; */
+            }
+    
+            body{
+                text-align: center;
+                /*background-image: url("img_tree.gif");*/
+                margin: 0;
+                padding: 0;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+            @font-face {
+              font-family: Helvetica-Neue-Bold;
+              src: url(Helvetica-Neue-Bold.woff);
+            }
+            section{
+                background-color: #232323;
+                color: #FFFFFF;
+                font-family: Helvetica-Neue-Bold;
+                z-index:0;
+                padding-top: 75px;
+                padding-bottom:75px;
+    
+            }
+            section.games{
+                font-size: 350%;
+            }
+            #gamesDisplayed {
+                /*background-color: #232323;*/
+                padding: 50px;
+                font-family: Helvetica-Neue-Bold;
+            }
+            #gamesDisplayed table {
+                padding: 6px;
+                background-color: #FFFFFF;
+                border: 7px solid #353535;
+                border-radius: 5px;
+                display: inline-table;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+            #gamesDisplayed th {
+                border: 1px solid #777777;
+                text-align: left;
+                padding: 4px;
+            }
+            #gamesDisplayed td {
+                border: 1px solid #353535;
+                text-align: left;
+                padding: 5px;
+            }
+            #sidebar {
+                height: 100%;
+                width: 50px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+                text-align: left;
+                font-family: Helvetica-Neue-Bold;
+            }
+            #sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            #sidebar .link {
+                visibility: hidden;
+            }
+
+            #sidebar a:hover {
+            color: #f1f1f1;
+            }
+
+            #sidebar .togglebtn {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            font-size: 36px;
+            margin-left: 50px;
+            visibility: visible;
+            }
+            #main {
+                margin-left: 50px;
+                transition: margin-left .5s;
+                
+            }
+            .disable-select {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none;   /* Chrome/Safari/Opera */
+                -khtml-user-select: none;    /* Konqueror */
+                -moz-user-select: none;      /* Firefox */
+                -ms-user-select: none;       /* Internet Explorer/Edge */
+                user-select: none;           /* Non-prefixed version, currently supported by any browser but < IE9 */
+            }
+            .gameBox {
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+            .gameBoxShadow{
+                -webkit-box-shadow: 8px 8px 17px -8px rgba(0,0,0,0.75);
+                -moz-box-shadow: 8px 8px 17px -8px rgba(0,0,0,0.75);
+                box-shadow: 8px 8px 17px -8px rgba(0,0,0,0.75);
+            }
+            .joinGameButton {
+                padding: 7px;
+                border: 7px outset #353535;
+                border-top: 7px hidden;
+                border-radius: 0px 0px 15px 15px;
+                background-color: #FFFFFF;
+                cursor: pointer;
+                margin: 0px 0px 40px 0px;
+            }
+            .joinGameButton:hover{
+                transition: .2s;
+                background-color: #e1e1e1;
+            }
+            .noClick {
+                cursor: not-allowed;
+                font-size: 20px;
+            }
+            /******* below obsolete******/
+            p {
+                font-size: 160%;
+                font-family: Helvetica-Neue-Bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="settingsOverlay">
+            <div id="settingsInner">
+                Settings <hr>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Change Your Email:</h2>
+                            <p><input type="text" name="email" placeholder="New Email Address" size="30" id="newEmail"><br>
+                            <input type="text" name="email" placeholder="Email Address Confirm" size="30" id="newEmailConfirm"><br>
+                            <input type="submit" value="Change Email" onClick="changeEmail()"></p>
+                        </td>
+                        <td>
+                            <h2>Change Your Password:</h2>
+                            <p><input type="password" name="password" placeholder="New Password" size="15" id="newPassword"><br>
+                            <input type="password" name="password" placeholder="New Password Confirm" size="15" id="newPasswordConfirm"><br>
+                            <input type="submit" value="Change Password" onClick="changePassword()"></p>
+                        </td>
+                    </tr>
+                </table>
+                <div id="closeButton" onClick="hideSettingsOverlay()">X</div>
+                <div id="fileDropArea">Drag Your JSON Deck Here! <br>Add This As A Private Deck?<input type="checkbox" id="privateDeckCheckbox"></div>
+            </div>
+        </div>
+        <div id="sidebar" class="disable-select">
+            <a href="javascript:void(0)" class="togglebtn" onclick="toggleSidebar()">☰</a>
+            <a href="javascript:void(0)" class="link" onClick="createGame(prompt('Please Enter A Name For The Game (must be over 5 characters and under 25)'))">Create<br>Game</a>
+            <a href="javascript:void(0)" class="link"><input type="checkbox" id="privateGameCheckbox"><p class="noClick" style="display:inLine">  Private?</p></a>
+            <a href="javascript:void(0)" class="link" onClick="showSettingsOverlay()">Settings</a>
+            <a href="javascript:void(0)" class="link" onClick="location.reload()">Log Out</a>
+        </div>
+        <div id="main">
+            <section class="games disable-select">Games Available:</section>
+            <br><br>
+            <span id="gamesDisplayed">
+                
+            </span>
+        </div>
+        <!--
+        <script>
+            //var testData = `{"games running":[{"name":"cool game6","players":1,"host":"coolKid","private":false,"rounds":10,"round":2,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game5","players":1,"host":"coolKid","private":false,"rounds":10,"round":3,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game1","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game2","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]},{"name":"cool game3","players":1,"host":"coolKid","private":false,"rounds":10,"round":5,"joinable":true,"decks added":[{"id":2,"name":"tech support deck","white card count":43,"black card count":18}]}]}`;
+            var testData = '{"games running":[]}';
+            
+        </script>
+         -->
+    </body>
+</html>

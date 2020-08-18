@@ -1,0 +1,106 @@
+<style>
+    @font-face {
+        font-family: Helvetica-Neue-Bold;
+        src: url(Helvetica-Neue-Bold.woff);
+    }
+    #settingsOverlay {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #23232380;
+        display: block;
+    }
+    #settingsOverlay #startScreen p {
+        font-size: 50%;
+    }
+    #settingsOverlay #settingsInner {
+        width: 50%;
+        height: 50%;
+        left: 25%;
+        position: relative;
+        top: 25%;
+        text-align: center;
+        margin-top: 30px;
+        background-color: #232323;
+        border-style: solid;
+        border-width: 10px;
+        border-color: #ffffff;
+        color: #FFFFFF;
+        font-size: 50px;
+        padding:15px;
+        font-family: Helvetica-Neue-Bold;
+        border-radius: 20px;
+    }
+    #settingsOverlay h2 {
+        font-size: 25px;
+        font-family: Helvetica-Neue-Bold;
+        color: #FFFFFF;
+    }
+    #settingsOverlay table tr td input {
+        margin: 5px;
+        align-self: top;
+        flex-basis: 75px;
+        flex-grow: 0;
+    }
+    #settingsOverlay table tr {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: flex-start;
+        justify-content: space-around;
+    }
+    #settingsOverlay table tr td {
+        text-align:center;
+        align-content: center;
+        border-style: dotted;
+        border-width: 10px;
+        border-color: #FFFFFF;
+        width: 40%;
+        margin: 10px;
+    }
+    #settingsOverlay #closeButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 30px;
+    }
+    #fileDropArea {
+        display: block;
+        border: 4px dashed #ABABAB;
+        border-radius: 25px;
+        font-size: 20px;
+        padding: 30px;
+        margin: 15px;
+        font-family: Helvetica-Neue-Bold;
+        color: #ABABAB;
+    }
+</style>
+<div id="settingsOverlay">
+    <div id="settingsInner">
+        Settings <hr>
+        <table>
+            <tr>
+                <td>
+                    <h2>Change Your Email:</h2>
+                    <p><input type="text" name="email" placeholder="New Email Address" size="30" id="newEmail"><br>
+                    <input type="text" name="email" placeholder="Email Address Confirm" size="30" id="newEmailConfirm"><br>
+                    <input type="submit" value="Change Email" onClick="changeEmail()"></p>
+                </td>
+                <td>
+                    <h2>Change Your Password:</h2>
+                    <p><input type="password" name="password" placeholder="New Password" size="15" id="newPassword"><br>
+                    <input type="password" name="password" placeholder="New Password Confirm" size="15" id="newPasswordConfirm"><br>
+                    <input type="submit" value="Change Password" onClick="changePassword()"></p>
+                </td>
+            </tr>
+        </table>
+        <div id="closeButton" onClick="hideSettingsOverlay()">X</div>
+        <div id="fileDropArea">Drag Your JSON Deck Here! <br>Add This As A Private Deck?<input type="checkbox" id="privateDeckCheckbox"></div>
+    </div>
+</div>
+<script src="/JS/jquery-3.4.1.min.js"></script>
+<script src="/JS/notify.js"></script>
+<script src="JS/settings.js"></script>
