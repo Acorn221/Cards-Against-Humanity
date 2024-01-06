@@ -46,7 +46,7 @@ function createDatabase(){ // This creates a fresh database everytime the game i
       db.exec("INSERT INTO Deck (userID, time, name, public) VALUES (1, 1570284327, 'The Best Deck', true)");
       db.exec("INSERT INTO Card (deckID, cardType, cardText, cardsToPick) VALUES (1, false, 'Elon Musk went to the hospital with ______ stuck up _____', 2)");
       db.exec("INSERT INTO Card (deckID, cardType, cardText, cardsToPick) VALUES (1, true, 'A Falcon Rocket', 0)");
-      db.exec("INSERT INTO Card (deckID, cardType, cardText, cardsToPick) VALUES (1, true, 'Harvey Winestein', 0)");
+      db.exec("INSERT INTO Card (deckID, cardType, cardText, cardsToPick) VALUES (1, true, 'Jeff Bezos', 0)");
       
       fs.readFile('cards.json', function(err, data) {// this opens the cards.json file and returns the contents as "data"
         if(err) return console.log(`Error reading file: ${err}`);
